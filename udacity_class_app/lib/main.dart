@@ -6,6 +6,7 @@
 
 // You can read about packages here: https://flutter.dev/using-packages/
 import 'package:flutter/material.dart';
+import 'package:udacity_class_app/widgets/category_route.dart';
 
 // You can use a relative import, i.e. `import 'category.dart';` or
 // a package import, as shown below.
@@ -37,11 +38,7 @@ class UnitConverterApp extends StatelessWidget {
         backgroundColor: Colors.green[100],
         body: const Center(
           // TODO: Determine what properties you'll need to pass into the widget
-          child: Category(
-            string: _categoryName,
-            iconData: _categoryIcon,
-            color: _categoryColor,
-          ),
+          child: CategoryRoute(),
         ),
       ),
     );
