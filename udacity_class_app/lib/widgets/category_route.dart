@@ -5,6 +5,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
+import 'package:udacity_class_app/model/uunit.dart';
 import 'package:udacity_class_app/widgets/category.dart';
 
 // TODO: Check if we need to import anything
@@ -18,7 +19,7 @@ import 'package:udacity_class_app/widgets/category.dart';
 ///
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
   const CategoryRoute({Key? key}) : super(key: key);
 
   static const _categoryNames = <String>[
@@ -44,6 +45,22 @@ class CategoryRoute extends StatelessWidget {
   ];
 
   @override
+  State<CategoryRoute> createState() => _CategoryRouteState();
+}
+
+class _CategoryRouteState extends State<CategoryRoute> {
+  /// Returns a list of mock [Unit]s.
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     // TODO: Create a list of the eight Categories, using the names and colors
     // from above. Use a placeholder icon, such as `Icons.cake` for each
@@ -53,12 +70,14 @@ class CategoryRoute extends StatelessWidget {
     final listView = Container(
       padding: const EdgeInsets.all(8),
       child: ListView.builder(
-        itemCount: _categoryNames.length,
+        itemCount: CategoryRoute._categoryNames.length,
         itemBuilder: (BuildContext context, int index) {
           return Category(
-              iconData: Icons.cake,
-              string: _categoryNames[index],
-              color: _baseColors[index]);
+            iconData: Icons.cake,
+            string: CategoryRoute._categoryNames[index],
+            color: CategoryRoute._baseColors[index],
+            units: _retrieveUnitList(CategoryRoute._categoryNames[index]),
+          );
         },
       ),
     );
